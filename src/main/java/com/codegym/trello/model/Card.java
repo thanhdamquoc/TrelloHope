@@ -17,9 +17,6 @@ public class Card {
     private Long id;
     private String title;
     private String content;
-    private int position;
-    @ManyToOne
-    private Column column;
     @ManyToMany
     private List<Member> members;
     @ManyToMany

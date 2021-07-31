@@ -1,7 +1,6 @@
 package com.codegym.trello.service.card;
 
 import com.codegym.trello.model.Card;
-import com.codegym.trello.model.Column;
 import com.codegym.trello.repository.ICardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +30,10 @@ public class CardService implements ICardService {
     @Override
     public void deleteById(Long id) {
         cardRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Card> findCardsByBoardId(Long boardId) {
+        return cardRepository.findCardsByBoardId(boardId);
     }
 }
