@@ -19,4 +19,5 @@ public class Column {
     private String title;
     @OneToMany
     private List<Card> cards;
+    private Long position;
 }
