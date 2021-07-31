@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,4 +18,6 @@ public class Board {
     private String title;
     @ManyToOne
     private User owner;
+    @OneToMany
+    private List<Column> columns;
 }

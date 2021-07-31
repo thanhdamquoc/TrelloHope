@@ -1,7 +1,9 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Board;
+import com.codegym.trello.model.Card;
 import com.codegym.trello.service.board.BoardService;
+import com.codegym.trello.service.card.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/boards")
 public class BoardController {
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private CardService cardService;
 
     @GetMapping
     public ResponseEntity<Iterable<Board>> findAll() {
@@ -27,6 +33,11 @@ public class BoardController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(boardOptional.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/cards")
+    public ResponseEntity<Iterable<Card>> findCardsByBoardId(@PathVariable Long id) {
+        return new ResponseEntity<>(cardService.findCardsByBoardId(id), HttpStatus.OK);
     }
 
     @PostMapping
