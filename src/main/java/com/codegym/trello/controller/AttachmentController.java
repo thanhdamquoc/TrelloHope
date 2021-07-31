@@ -1,7 +1,6 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Attachment;
-import com.codegym.trello.model.Comment;
 import com.codegym.trello.service.attachment.IAttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
