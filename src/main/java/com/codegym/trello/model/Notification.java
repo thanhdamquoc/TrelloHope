@@ -15,7 +15,10 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String content;
+    private String url;
+    private boolean status;
     @ManyToMany
-    private List<Member> receiver;
+    private List<User> receiver;
 }
