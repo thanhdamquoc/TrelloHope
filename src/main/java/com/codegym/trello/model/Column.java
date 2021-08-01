@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,5 +20,7 @@ public class Column {
     private String title;
     @ManyToOne
     private Board board;
+    @OneToMany
+    private List<Card> card;
     private int position;
 }

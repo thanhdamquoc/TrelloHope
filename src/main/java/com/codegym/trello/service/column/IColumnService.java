@@ -4,4 +4,5 @@ import com.codegym.trello.model.Column;
 import com.codegym.trello.service.GeneralService;
 
 public interface IColumnService extends GeneralService<Column> {
+    Iterable<Column> findAllByBoard(Long board);
 }
