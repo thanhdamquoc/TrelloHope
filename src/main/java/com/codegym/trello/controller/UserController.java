@@ -5,15 +5,20 @@ import com.codegym.trello.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<Iterable<User>> findAll() {
@@ -31,6 +36,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> add(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
