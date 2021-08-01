@@ -21,7 +21,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Card> findById(@RequestParam Long id) {
+    public ResponseEntity<Card> findById(@PathVariable Long id) {
         Optional<Card> optionalColumn = cardService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class CardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Card> update(@RequestParam Long id, @RequestBody Card card) {
+    public ResponseEntity<Card> update(@PathVariable Long id, @RequestBody Card card) {
         Optional<Card> optionalCard = cardService.findById(id);
         if (!optionalCard.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +47,7 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Card> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Card> deleteById(@PathVariable Long id) {
         Optional<Card> cardOptional = cardService.findById(id);
         if (!cardOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
