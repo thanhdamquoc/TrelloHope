@@ -42,10 +42,10 @@ public class BoardController {
         return new ResponseEntity<>(boardOptional.get(), HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}/cards")
-//    public ResponseEntity<Iterable<Card>> findCardsByBoardId(@PathVariable Long id) {
-//        return new ResponseEntity<>(cardService.findCardsByBoardId(id), HttpStatus.OK);
-//    }
+    @GetMapping("/{id}/cards")
+    public ResponseEntity<Iterable<Card>> findCardsByBoardId(@PathVariable Long id) {
+        return new ResponseEntity<>(cardService.findCardsByBoardId(id), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<Board> add(@RequestBody Board board) {

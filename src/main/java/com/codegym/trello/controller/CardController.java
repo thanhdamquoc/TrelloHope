@@ -17,6 +17,11 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
+    @GetMapping
+    public ResponseEntity<Iterable<Card>> findAll() {
+        return new ResponseEntity<>(cardService.findAll(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Card> findById(@PathVariable Long id) {
         Optional<Card> optionalColumn = cardService.findById(id);
@@ -27,7 +32,7 @@ public class CardController {
         }
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Card> save(@RequestBody Card card) {
         return new ResponseEntity<>(cardService.save(card), HttpStatus.CREATED);
     }

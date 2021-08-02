@@ -32,4 +32,8 @@ public class CardService implements ICardService {
         cardRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Card> findCardsByBoardId(Long boardId) {
+        return cardRepository.findCardsByBoardId(boardId);
+    }
 }
