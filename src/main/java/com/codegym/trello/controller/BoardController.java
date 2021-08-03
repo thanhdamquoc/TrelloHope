@@ -4,8 +4,7 @@ import com.codegym.trello.model.Board;
 import com.codegym.trello.model.Card;
 import com.codegym.trello.model.Column;
 import com.codegym.trello.service.board.BoardService;
-import com.codegym.trello.service.card.CardService;
-import com.codegym.trello.service.column.ColumnService;
+import com.codegym.trello.service.card.ICardService;
 import com.codegym.trello.service.column.IColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +23,10 @@ public class BoardController {
     private BoardService boardService;
 
     @Autowired
-    private CardService cardService;
+    private IColumnService columnService;
 
     @Autowired
-    private IColumnService columnService;
+    private ICardService cardService;
 
     @GetMapping
     public ResponseEntity<Iterable<Board>> findAll() {
@@ -43,9 +42,9 @@ public class BoardController {
         return new ResponseEntity<>(boardOptional.get(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/cards")
-    public ResponseEntity<Iterable<Card>> findCardsByBoardId(@PathVariable Long id) {
-        return new ResponseEntity<>(cardService.findCardsByBoardId(id), HttpStatus.OK);
+    @GetMapping("/{id}/sorted")
+    public ResponseEntity<Board> findByIdSorted(@PathVariable Long id) {
+        return new ResponseEntity<>(boardService.findByIdSorted(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -55,9 +54,7 @@ public class BoardController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Board> update(@PathVariable Long id, @RequestBody Board board) {
-        board.setId(id);
-        Board save = boardService.save(board);
-        return new ResponseEntity<>(boardService.findById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(boardService.save(board), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

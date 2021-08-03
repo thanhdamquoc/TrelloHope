@@ -1,6 +1,8 @@
 package com.codegym.trello.controller;
 
+import com.codegym.trello.model.SimpleBoard;
 import com.codegym.trello.model.User;
+import com.codegym.trello.service.board.BoardService;
 import com.codegym.trello.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping
     public ResponseEntity<Iterable<User>> findAll() {
@@ -48,5 +53,15 @@ public class UserController {
         }
         userService.deleteById(id);
         return new ResponseEntity<>(userOptional.get(), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{userId}/owned-boards")
+    public ResponseEntity<Iterable<SimpleBoard>> findAllOwnedBoardsByUserId(@PathVariable Long userId) {
+        return new ResponseEntity<>(boardService.findAllOwnedBoardsByUserId(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}/shared-boards")
+    public ResponseEntity<Iterable<SimpleBoard>> findAllSharedBoardsByUserId(@PathVariable Long userId) {
+        return new ResponseEntity<>(boardService.findAllSharedBoardsByUserId(userId), HttpStatus.OK);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/columns")
 public class ColumnController {
     @Autowired
@@ -21,7 +22,7 @@ public class ColumnController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Column> findById(@RequestParam Long id) {
+    public ResponseEntity<Column> findById(@PathVariable Long id) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -35,8 +36,13 @@ public class ColumnController {
         return new ResponseEntity<>(columnService.save(column), HttpStatus.CREATED);
     }
 
+    @PutMapping
+    public ResponseEntity<Iterable<Column>> saveAll(@RequestBody Iterable<Column> columns) {
+        return new ResponseEntity<>(columnService.saveAll(columns), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Column> update(@RequestParam Long id, @RequestBody Column column) {
+    public ResponseEntity<Column> update(@PathVariable Long id, @RequestBody Column column) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +53,7 @@ public class ColumnController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Column> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Column> deleteById(@PathVariable Long id) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

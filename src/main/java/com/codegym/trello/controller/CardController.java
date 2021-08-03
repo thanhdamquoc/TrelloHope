@@ -1,6 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Card;
+import com.codegym.trello.model.Column;
 import com.codegym.trello.service.card.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/cards")
 public class CardController {
     @Autowired
@@ -21,7 +23,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Card> findById(@RequestParam Long id) {
+    public ResponseEntity<Card> findById(@PathVariable Long id) {
         Optional<Card> optionalColumn = cardService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -35,8 +37,13 @@ public class CardController {
         return new ResponseEntity<>(cardService.save(card), HttpStatus.CREATED);
     }
 
+    @PutMapping
+    public ResponseEntity<Iterable<Card>> saveAll(@RequestBody Iterable<Card> cards) {
+        return new ResponseEntity<>(cardService.saveAll(cards), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Card> update(@RequestParam Long id, @RequestBody Card card) {
+    public ResponseEntity<Card> update(@PathVariable Long id, @RequestBody Card card) {
         Optional<Card> optionalCard = cardService.findById(id);
         if (!optionalCard.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +54,7 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Card> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Card> deleteById(@PathVariable Long id) {
         Optional<Card> cardOptional = cardService.findById(id);
         if (!cardOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
