@@ -67,23 +67,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void init() {
-        List<User> users = (List<User>) userService.findAll();
-        List<Roles> roleList = (List<Roles>) roleService.findAll();
-        if (roleList.isEmpty()) {
-            Roles roleUser = new Roles();
-            roleUser.setId(2L);
-            roleUser.setName("ROLE_USER");
-            roleService.save(roleUser);
-        }
-        if (users.isEmpty()) {
-            User user = new User();
-            Set<Roles> roles = new HashSet<>();
-            roles.add(new Roles(1L, "ROLE_USER"));
-            user.setUsername("user");
-            user.setPassword(passwordEncoder.encode("1"));
-            user.setRoles(roles);
-            userService.save(user);
-        }
+//        List<User> users = (List<User>) userService.findAll();
+//        List<Roles> roleList = (List<Roles>) roleService.findAll();
+//        if (roleList.isEmpty()) {
+//            Roles roleUser = new Roles();
+//            roleUser.setId(2L);
+//            roleUser.setName("ROLE_USER");
+//            roleService.save(roleUser);
+//        }
+//        if (users.isEmpty()) {
+//            User user = new User();
+//            Set<Roles> roles = new HashSet<>();
+//            roles.add(new Roles(1L, "ROLE_USER"));
+//            user.setUsername("user");
+//            user.setPassword(passwordEncoder.encode("1"));
+//            user.setRoles(roles);
+//            userService.save(user);
+//        }
     }
 
     @Autowired
@@ -96,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/users/*").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
