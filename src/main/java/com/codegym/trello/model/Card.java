@@ -21,4 +21,5 @@ public class Card {
     private List<Member> members;
     @ManyToMany
     private List<Tag> tags;
+    private Long position;
 }

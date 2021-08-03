@@ -21,7 +21,7 @@ public class ColumnController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Column> findById(@RequestParam Long id) {
+    public ResponseEntity<Column> findById(@PathVariable Long id) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class ColumnController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Column> update(@RequestParam Long id, @RequestBody Column column) {
+    public ResponseEntity<Column> update(@PathVariable Long id, @RequestBody Column column) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +47,7 @@ public class ColumnController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Column> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Column> deleteById(@PathVariable Long id) {
         Optional<Column> optionalColumn = columnService.findById(id);
         if (!optionalColumn.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
