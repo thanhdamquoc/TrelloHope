@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "columns")
-public class Column {
+public class Column implements Comparable<Column> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,4 +20,14 @@ public class Column {
     @OneToMany
     private List<Card> cards;
     private Long position;
+
+    @Override
+    public int compareTo(Column o) {
+        if (position == o.position)
+            return 0;
+        else if (position > o.position)
+            return 1;
+        else
+            return -1;
+    }
 }

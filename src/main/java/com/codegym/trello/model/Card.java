@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card {
+public class Card implements Comparable<Card> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,4 +22,14 @@ public class Card {
     @ManyToMany
     private List<Tag> tags;
     private Long position;
+
+    @Override
+    public int compareTo(Card o) {
+        if (position == o.position)
+            return 0;
+        else if (position > o.position)
+            return 1;
+        else
+            return -1;
+    }
 }
