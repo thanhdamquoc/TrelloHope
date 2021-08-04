@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/columns")
 public class ColumnController {
@@ -33,6 +34,11 @@ public class ColumnController {
     @PostMapping
     public ResponseEntity<Column> save(@RequestBody Column column) {
         return new ResponseEntity<>(columnService.save(column), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<Iterable<Column>> saveAll(@RequestBody Iterable<Column> columns) {
+        return new ResponseEntity<>(columnService.saveAll(columns), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

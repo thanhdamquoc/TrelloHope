@@ -33,7 +33,7 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Iterable<Card> findCardsByBoardId(Long boardId) {
-        return cardRepository.findCardsByBoardId(boardId);
+    public Iterable<Card> saveAll(Iterable<Card> cards) {
+        return cardRepository.saveAll(cards);
     }
 }

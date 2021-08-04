@@ -1,15 +1,15 @@
 package com.codegym.trello.controller;
 
+import com.codegym.trello.model.SimpleBoard;
 import com.codegym.trello.model.User;
+import com.codegym.trello.service.board.BoardService;
 import com.codegym.trello.service.user.UserService;
-import jdk.internal.net.http.hpack.Decoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -20,8 +20,10 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BoardService boardService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<Iterable<User>> findAll() {
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/recoverpassword")
-    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user) {
+    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user){
         User userOptional = userService.findByUsernameAndNickname(user.getUsername(), user.getNickname());
         return new ResponseEntity<>(userOptional, HttpStatus.OK);
     }
@@ -51,14 +53,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
-        Optional<User> userOptional = userService.findById(id);
-        if (!userOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            user.setId(id);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
-        }
+        user.setId(id);
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -69,5 +65,15 @@ public class UserController {
         }
         userService.deleteById(id);
         return new ResponseEntity<>(userOptional.get(), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{userId}/owned-boards")
+    public ResponseEntity<Iterable<SimpleBoard>> findAllOwnedBoardsByUserId(@PathVariable Long userId) {
+        return new ResponseEntity<>(boardService.findAllOwnedBoardsByUserId(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}/shared-boards")
+    public ResponseEntity<Iterable<SimpleBoard>> findAllSharedBoardsByUserId(@PathVariable Long userId) {
+        return new ResponseEntity<>(boardService.findAllSharedBoardsByUserId(userId), HttpStatus.OK);
     }
 }

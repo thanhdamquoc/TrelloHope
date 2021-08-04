@@ -1,7 +1,6 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Card;
-import com.codegym.trello.model.Column;
 import com.codegym.trello.service.card.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/cards")
 public class CardController {
@@ -35,6 +34,11 @@ public class CardController {
     @PostMapping
     public ResponseEntity<Card> save(@RequestBody Card card) {
         return new ResponseEntity<>(cardService.save(card), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<Iterable<Card>> saveAll(@RequestBody Iterable<Card> cards) {
+        return new ResponseEntity<>(cardService.saveAll(cards), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
