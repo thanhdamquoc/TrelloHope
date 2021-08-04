@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/recoverpassword")
-    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user){
+    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user) {
         User userOptional = userService.findByUsernameAndNickname(user.getUsername(), user.getNickname());
         return new ResponseEntity<>(userOptional, HttpStatus.OK);
     }
