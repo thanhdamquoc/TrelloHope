@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/members")
 public class MemberController {
 
@@ -24,6 +25,11 @@ public class MemberController {
     @PostMapping("")
     public ResponseEntity<Member> saveMember(@RequestBody Member member) {
         return new ResponseEntity<>(memberService.save(member), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity<Iterable<Member>> saveMembers(@RequestBody Iterable<Member> members) {
+        return new ResponseEntity<>(memberService.saveAll(members), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

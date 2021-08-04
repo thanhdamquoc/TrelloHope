@@ -76,4 +76,9 @@ public class UserController {
     public ResponseEntity<Iterable<SimpleBoard>> findAllSharedBoardsByUserId(@PathVariable Long userId) {
         return new ResponseEntity<>(boardService.findAllSharedBoardsByUserId(userId), HttpStatus.OK);
     }
+
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<Iterable<User>> findUserByKeyword(@PathVariable String keyword) {
+        return new ResponseEntity<>(userService.findUserByKeyword(keyword), HttpStatus.OK);
+    }
 }
