@@ -1,5 +1,6 @@
 package com.codegym.trello.service.member;
 
+import com.codegym.trello.model.DetailedMember;
 import com.codegym.trello.model.Member;
 import com.codegym.trello.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,15 @@ public class MemberService implements IMemberService{
     @Override
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<DetailedMember> getMembersByBoardId(Long boardId) {
+        return memberRepository.getMembersByBoardId(boardId);
+    }
+
+    @Override
+    public Iterable<Member> saveAll(Iterable<Member> members) {
+        return memberRepository.saveAll(members);
     }
 }
