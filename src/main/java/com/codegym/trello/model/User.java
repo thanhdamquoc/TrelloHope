@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -22,6 +23,7 @@ public class User {
 
     private String image;
 
+    @Size(min = 4)
     private String nickname;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/recoverpassword")
-    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user){
+    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user) {
         User userOptional = userService.findByUsernameAndNickname(user.getUsername(), user.getNickname());
         return new ResponseEntity<>(userOptional, HttpStatus.OK);
     }
@@ -51,9 +51,14 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
-        user.setId(id);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+        Optional<User> userOptional = userService.findById(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            user.setId(id);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/{id}")
