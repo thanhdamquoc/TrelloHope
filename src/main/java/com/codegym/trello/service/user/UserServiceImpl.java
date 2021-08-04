@@ -51,11 +51,4 @@ public class UserServiceImpl implements UserService {
     public User findByUsernameAndNickname(String username, String nickname) {
         return userRepository.findByUsernameAndNickname(username, nickname);
     }
-
-    @Override
-    public Iterable<User> findAllByUsername(String username) {
-        return userRepository.findAllByUsername("%"+ username+ "%");
-    }
-
-
 }

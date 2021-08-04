@@ -10,6 +10,5 @@ public interface UserService extends GeneralService<User>, UserDetailsService {
 
     User findByUsernameAndNickname(String username, String nickname);
 
-    Iterable<User> findAllByUsername(String username);
 
 }

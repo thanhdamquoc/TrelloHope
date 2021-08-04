@@ -10,6 +10,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     User findByUsernameAndNickname(String username, String nickname);
 
-    @Query(nativeQuery = false, value = "select u from User as u where u.username like ?1")
-    Iterable<User> findAllByUsername(String username);
 }
