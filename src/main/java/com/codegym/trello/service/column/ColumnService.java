@@ -1,14 +1,12 @@
 package com.codegym.trello.service.column;
 
 import com.codegym.trello.model.Board;
-import com.codegym.trello.model.Card;
 import com.codegym.trello.model.Column;
 import com.codegym.trello.repository.IColumnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,16 +36,7 @@ public class ColumnService implements IColumnService {
     }
 
     @Override
-    public Iterable<Column> findAllByBoard(Long board){
-        Iterable<Column> columns = columnRepository.findColumnByBoardId(board);
-        for(Column column : columns){
-            Collections.sort(column.getCard());
-            List<Card> cardList = column.getCard();
-            for (Card card : cardList){
-                System.out.println(card.getPosition());
-            }
-            column.setCard(cardList);
-        }
-        return columns;
+    public Iterable<Column> saveAll(Iterable<Column> columns) {
+        return columnRepository.saveAll(columns);
     }
 }
