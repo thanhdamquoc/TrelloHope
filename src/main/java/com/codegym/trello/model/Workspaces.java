@@ -5,21 +5,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board {
+public class Workspaces {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+
     private String title;
+
+    private String type;
+
     @ManyToOne
     private User owner;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<User> members;
+
     @OneToMany
-    private List<Column> columns;
+    private Set<Board> boards;
+
 }
