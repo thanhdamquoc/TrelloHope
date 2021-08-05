@@ -20,5 +20,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "join user u on m.user_id = u.id " +
             "where board_id = ?1", nativeQuery = true)
     Iterable<User> findMembersByBoardId(Long boardId);
-
 }

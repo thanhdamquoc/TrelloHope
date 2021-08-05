@@ -1,5 +1,6 @@
 package com.codegym.trello.repository;
 
+import com.codegym.trello.model.User;
 import com.codegym.trello.model.Workspaces;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
