@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
 @RestController
-@CrossOrigin
 @RequestMapping("/boards")
 public class BoardController {
     @Autowired

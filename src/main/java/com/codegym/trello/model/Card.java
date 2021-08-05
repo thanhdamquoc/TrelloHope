@@ -5,23 +5,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card implements Comparable<Card> {
+public class Card implements Comparable<Card>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min = 4)
     private String title;
     private String content;
+    private int position;
     @ManyToMany
     private List<Member> members;
     @ManyToMany
     private List<Tag> tags;
-    private Long position;
+
 
     @Override
     public int compareTo(Card o) {
