@@ -1,18 +1,13 @@
 package com.codegym.trello.controller;
 
-import com.codegym.trello.model.Board;
-import com.codegym.trello.model.Card;
-import com.codegym.trello.model.Column;
+import com.codegym.trello.model.*;
 import com.codegym.trello.service.board.BoardService;
-import com.codegym.trello.service.card.ICardService;
-import com.codegym.trello.service.column.IColumnService;
+import com.codegym.trello.service.member.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/boards")
@@ -21,10 +16,7 @@ public class BoardController {
     private BoardService boardService;
 
     @Autowired
-    private IColumnService columnService;
-
-    @Autowired
-    private ICardService cardService;
+    private IMemberService memberService;
 
     @GetMapping
     public ResponseEntity<Iterable<Board>> findAll() {
@@ -63,5 +55,10 @@ public class BoardController {
         }
         boardService.deleteById(id);
         return new ResponseEntity<>(boardOptional.get(), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}/members")
+    public ResponseEntity<Iterable<DetailedMember>> findMembersByBoardId(@PathVariable Long id) {
+        return new ResponseEntity<>(memberService.getMembersByBoardId(id), HttpStatus.OK);
     }
 }
