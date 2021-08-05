@@ -1,6 +1,6 @@
 package com.codegym.trello.service.workspaces;
 
-import com.codegym.trello.model.Workspaces;
+import com.codegym.trello.model.Workspace;
 import com.codegym.trello.repository.WorkspaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,17 +12,17 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Autowired
     private WorkspaceRepository workspacesRepository;
     @Override
-    public Iterable<Workspaces> findAll() {
+    public Iterable<Workspace> findAll() {
         return workspacesRepository.findAll();
     }
 
     @Override
-    public Optional<Workspaces> findById(Long id) {
+    public Optional<Workspace> findById(Long id) {
         return workspacesRepository.findById(id);
     }
 
     @Override
-    public Workspaces save(Workspaces workspaces) {
+    public Workspace save(Workspace workspaces) {
         return workspacesRepository.save(workspaces);
     }
 
@@ -32,9 +32,8 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public Iterable<Workspaces> findAllByOwnerId(Long id) {
+    public Iterable<Workspace> findAllByOwnerId(Long id) {
         return workspacesRepository.findAllByOwnerId(id);
     }
-
 
 }

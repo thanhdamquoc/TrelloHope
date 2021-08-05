@@ -1,6 +1,6 @@
 package com.codegym.trello.controller;
 
-import com.codegym.trello.model.Workspaces;
+import com.codegym.trello.model.Workspace;
 import com.codegym.trello.service.workspaces.WorkspaceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +17,13 @@ public class WorkspaceController {
     private WorkspaceServiceImpl workspacesService;
 
     @GetMapping("")
-    public ResponseEntity<Iterable<Workspaces>> findAll() {
+    public ResponseEntity<Iterable<Workspace>> findAll() {
         return new ResponseEntity<>(workspacesService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/owner/{id}")
-    public ResponseEntity<Iterable<Workspaces>> findAllByOwnerId(@PathVariable Long id) {
-        Iterable<Workspaces> workspaces = workspacesService.findAllByOwnerId(id);
+    public ResponseEntity<Iterable<Workspace>> findAllByOwnerId(@PathVariable Long id) {
+        Iterable<Workspace> workspaces = workspacesService.findAllByOwnerId(id);
         if (workspaces == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -31,13 +31,13 @@ public class WorkspaceController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Workspaces> save(@RequestBody Workspaces workspaces) {
-        return new ResponseEntity<>(workspacesService.save(workspaces), HttpStatus.CREATED);
+    public ResponseEntity<Workspace> save(@RequestBody Workspace workspaces) {
+            return new ResponseEntity<>(workspacesService.save(workspaces), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Workspaces>> findById(@PathVariable Long id){
-        Optional<Workspaces> workspacesOptional = workspacesService.findById(id);
+    public ResponseEntity<Optional<Workspace>> findById(@PathVariable Long id){
+        Optional<Workspace> workspacesOptional = workspacesService.findById(id);
         if (!workspacesOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -45,20 +45,20 @@ public class WorkspaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Workspaces> updateById(@PathVariable Long id, @RequestBody Workspaces workspaces){
-        Optional<Workspaces> workspacesOptional = workspacesService.findById(id);
+    public ResponseEntity<Workspace> updateById(@PathVariable Long id, @RequestBody Workspace workspace){
+        Optional<Workspace> workspacesOptional = workspacesService.findById(id);
         if (!workspacesOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        workspaces.setId(workspacesOptional.get().getId());
-        workspacesService.save(workspaces);
-        return new ResponseEntity<>(workspaces,HttpStatus.OK);
+        workspace.setId(workspacesOptional.get().getId());
+        workspacesService.save(workspace);
+        return new ResponseEntity<>(workspace,HttpStatus.OK);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Workspaces> deleteById(@PathVariable Long id){
-        Optional<Workspaces> workspacesOptional = workspacesService.findById(id);
+    public ResponseEntity<Workspace> deleteById(@PathVariable Long id){
+        Optional<Workspace> workspacesOptional = workspacesService.findById(id);
         if (!workspacesOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

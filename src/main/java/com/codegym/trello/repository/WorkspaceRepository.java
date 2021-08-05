@@ -1,14 +1,19 @@
 package com.codegym.trello.repository;
 
-import com.codegym.trello.model.User;
-import com.codegym.trello.model.Workspaces;
+import com.codegym.trello.model.Workspace;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WorkspaceRepository extends JpaRepository<Workspaces, Long> {
-    @Query(nativeQuery = true, value = "select * from workspaces as w join workspaces_members wm on w.id = wm.workspaces_id where w.owner_id = ?1 or wm.members_id = ?1 group by workspaces_id")
-    Iterable<Workspaces> findAllByOwnerId(Long id);
+public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
+    @Query(nativeQuery = true, value = "select * from workspace w " +
+            "where w.owner_id = 1 " +
+            "   or w.id in " +
+            "      (select wm.workspace_id " +
+            "      from workspace_members wm " +
+            "          where wm.members_id = 1)")
+    Iterable<Workspace> findAllByOwnerId(Long id);
+
 
 }
