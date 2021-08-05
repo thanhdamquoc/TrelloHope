@@ -2,17 +2,12 @@ package com.codegym.trello.controller;
 
 import com.codegym.trello.model.*;
 import com.codegym.trello.service.board.BoardService;
-import com.codegym.trello.service.card.ICardService;
-import com.codegym.trello.service.column.IColumnService;
 import com.codegym.trello.service.member.IMemberService;
-import com.codegym.trello.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @CrossOrigin
 @RestController
