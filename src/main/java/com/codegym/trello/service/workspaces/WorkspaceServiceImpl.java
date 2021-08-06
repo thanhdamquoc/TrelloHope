@@ -36,4 +36,12 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return workspacesRepository.findAllByOwnerId(id);
     }
 
+    @Override
+    public Boolean isBoardInWorkspace(Long boardId) {
+        Integer isInWorkspace = workspacesRepository.isBoardInWorkspace(boardId);
+        if (isInWorkspace != 0) {
+            return true;
+        }
+        return false;
+    }
 }
