@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
     public Board findByIdSorted(Long id) {
         Board board = boardRepository.findById(id).get();
         for (Column column : board.getColumns()) {
-            Collections.sort(column.getCards());
+            Collections.sort(column.getCard());
         }
         Collections.sort(board.getColumns());
         return board;

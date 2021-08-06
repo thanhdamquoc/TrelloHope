@@ -17,10 +17,10 @@ public class ColumnController {
     @Autowired
     private ColumnService columnService;
 
-    @GetMapping("/{board}")
-    public ResponseEntity<Iterable<Column>> findAllByBoard(@PathVariable Long board) {
-        return new ResponseEntity<>(columnService.findAllByBoard(board), HttpStatus.OK);
-    }
+//    @GetMapping("/{board}")
+//    public ResponseEntity<Iterable<Column>> findAllByBoard(@PathVariable Long board) {
+//        return new ResponseEntity<>(columnService.findAllByBoard(board), HttpStatus.OK);
+//    }
 
 //    @GetMapping("/{id}")
 //    public ResponseEntity<Column> findById(@RequestParam Long id) {
