@@ -20,7 +20,7 @@ public class User {
     private Long id;
 
     @NotEmpty
-    @Size(min = 6, max = 15)
+    @Size(min = 4, max = 15)
     private String username;
 
     @NotEmpty
