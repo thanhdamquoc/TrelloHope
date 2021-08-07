@@ -19,7 +19,6 @@ public class Card implements Comparable<Card>{
     private Long id;
 
     @NotNull
-    @Size(min = 4)
     private String title;
     private String content;
     private int position;
