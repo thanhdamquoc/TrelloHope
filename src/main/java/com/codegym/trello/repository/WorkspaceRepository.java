@@ -20,4 +20,5 @@ public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
                     "from workspace_boards wb " +
                     "where wb.boards_id = ?1")
     Integer isBoardInWorkspace(Long boardId);
+
 }
