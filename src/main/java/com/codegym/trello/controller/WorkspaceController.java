@@ -1,5 +1,6 @@
 package com.codegym.trello.controller;
 
+import com.codegym.trello.model.MemberWorkspace;
 import com.codegym.trello.model.Workspace;
 import com.codegym.trello.service.workspaces.WorkspaceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,7 @@ public class WorkspaceController {
         workspace.setId(workspacesOptional.get().getId());
         workspacesService.save(workspace);
         return new ResponseEntity<>(workspace,HttpStatus.OK);
+
     }
 
 
@@ -65,4 +67,6 @@ public class WorkspaceController {
         workspacesService.deleteById(workspacesOptional.get().getId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }
