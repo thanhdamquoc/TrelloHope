@@ -1,9 +1,6 @@
 package com.codegym.trello.service.board;
 
-import com.codegym.trello.model.Board;
-import com.codegym.trello.model.Column;
-import com.codegym.trello.model.SimpleBoard;
-import com.codegym.trello.model.User;
+import com.codegym.trello.model.*;
 import com.codegym.trello.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,9 +37,13 @@ public class BoardServiceImpl implements BoardService {
     public Board findByIdSorted(Long id) {
         Board board = boardRepository.findById(id).get();
         for (Column column : board.getColumns()) {
+            for (Card card : column.getCards()) {
+                Collections.sort(card.getTags());
+            }
             Collections.sort(column.getCards());
         }
         Collections.sort(board.getColumns());
+        Collections.sort(board.getTags());
         return board;
     }
 

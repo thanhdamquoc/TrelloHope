@@ -22,4 +22,6 @@ public class Board {
     private User owner;
     @OneToMany
     private List<Column> columns;
+    @ManyToMany
+    private List<Tag> tags;
 }
