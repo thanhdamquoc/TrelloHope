@@ -22,9 +22,6 @@ public class UserController {
     @Autowired
     private BoardService boardService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @GetMapping
     public ResponseEntity<Iterable<User>> findAll() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
@@ -41,20 +38,17 @@ public class UserController {
 
     @PostMapping("/recoverpassword")
     public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user){
-        User userOptional = userService.findByUsernameAndNickname(user.getUsername(), user.getNickname());
+        User userOptional = userService.findByUsernameAndEmail(user.getUsername(), user.getEmail());
         return new ResponseEntity<>(userOptional, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<User> add(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
-        user.setId(id);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 

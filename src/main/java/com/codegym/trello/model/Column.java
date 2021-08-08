@@ -1,3 +1,4 @@
+
 package com.codegym.trello.model;
 
 import lombok.AllArgsConstructor;

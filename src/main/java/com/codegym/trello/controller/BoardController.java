@@ -3,13 +3,13 @@ package com.codegym.trello.controller;
 import com.codegym.trello.model.*;
 import com.codegym.trello.service.board.BoardService;
 import com.codegym.trello.service.member.IMemberService;
+import com.codegym.trello.service.workspaces.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
 @RestController
 @CrossOrigin
 @RequestMapping("/boards")
@@ -19,6 +19,9 @@ public class BoardController {
 
     @Autowired
     private IMemberService memberService;
+
+    @Autowired
+    private WorkspaceService workspaceService;
 
     @GetMapping
     public ResponseEntity<Iterable<Board>> findAll() {
@@ -62,5 +65,10 @@ public class BoardController {
     @GetMapping("/{id}/members")
     public ResponseEntity<Iterable<DetailedMember>> findMembersByBoardId(@PathVariable Long id) {
         return new ResponseEntity<>(memberService.getMembersByBoardId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/is-in-workspace")
+    public ResponseEntity<Boolean> isBoardInWorkspace(@PathVariable Long id) {
+        return new ResponseEntity<>(workspaceService.isBoardInWorkspace(id), HttpStatus.OK);
     }
 }

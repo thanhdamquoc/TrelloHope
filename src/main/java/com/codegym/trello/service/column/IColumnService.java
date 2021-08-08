@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface IColumnService extends GeneralService<Column> {
     Iterable<Column> saveAll(Iterable<Column> columns);
+
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Workspaces {
+public class Workspace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,10 +23,9 @@ public class Workspaces {
     @ManyToOne
     private User owner;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> members;
+    @OneToMany
+    private Set<MemberWorkspace> members;
 
     @OneToMany
     private Set<Board> boards;
-
 }
