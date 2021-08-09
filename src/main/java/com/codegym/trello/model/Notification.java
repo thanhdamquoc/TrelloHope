@@ -11,11 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notification {
+public class    Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String content;
     @ManyToMany
-    private List<Member> receiver;
+    private List<User> receiver;
 }
