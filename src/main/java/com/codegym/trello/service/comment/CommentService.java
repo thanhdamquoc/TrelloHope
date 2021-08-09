@@ -1,5 +1,6 @@
 package com.codegym.trello.service.comment;
 
+import com.codegym.trello.model.Card;
 import com.codegym.trello.model.Comment;
 import com.codegym.trello.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,10 @@ public class CommentService implements ICommentService{
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Comment> findAllCommentByCardId(Long cardId) {
+        return commentRepository.findAllByCardId(cardId);
+    }
+
 }
