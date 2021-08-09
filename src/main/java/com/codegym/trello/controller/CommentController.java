@@ -1,6 +1,8 @@
 package com.codegym.trello.controller;
 
+import com.codegym.trello.model.Card;
 import com.codegym.trello.model.Comment;
+import com.codegym.trello.service.card.ICardService;
 import com.codegym.trello.service.comment.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class CommentController {
     @Autowired
     private ICommentService commentService;
 
+    @Autowired
+    private ICardService cardService;
+
     @GetMapping
     public ResponseEntity<Iterable<Comment>> findAll() {
         return new ResponseEntity<>(commentService.findAll(), HttpStatus.OK);
@@ -29,6 +34,12 @@ public class CommentController {
         }
         return new ResponseEntity<>(commentOptional.get(), HttpStatus.OK);
     }
+
+    @GetMapping("/{cardId}/comment-card")
+    public ResponseEntity<Iterable<Comment>> findAllCommentByCardId(@PathVariable Long cardId){
+        return new ResponseEntity<>(commentService.findAllCommentByCardId(cardId), HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<Comment> create(@RequestBody Comment comment) {
