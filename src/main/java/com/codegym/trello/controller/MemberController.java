@@ -5,6 +5,7 @@ import com.codegym.trello.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -59,6 +60,13 @@ public class MemberController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         memberService.deleteById(memberOptional.get().getId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Transactional
+    @DeleteMapping("/{boardId}/{userId}")
+    public ResponseEntity<Member> deleteMemberWorkspace(@PathVariable Long boardId, @PathVariable Long userId ){
+        memberService.deleteByBoardIdAndUserId(boardId,userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

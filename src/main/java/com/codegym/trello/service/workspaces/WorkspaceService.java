@@ -6,4 +6,5 @@ import com.codegym.trello.service.GeneralService;
 public interface WorkspaceService extends GeneralService<Workspace> {
     Iterable<Workspace> findAllByOwnerId (Long id);
     Boolean isBoardInWorkspace(Long boardId);
+
 }

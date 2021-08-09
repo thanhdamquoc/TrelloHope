@@ -43,4 +43,9 @@ public class MemberService implements IMemberService{
     public Iterable<Member> saveAll(Iterable<Member> members) {
         return memberRepository.saveAll(members);
     }
+
+    @Override
+    public void deleteByBoardIdAndUserId(Long boardId, Long userId){
+        memberRepository.deleteByBoardIdAndUserId(boardId,userId);
+    }
 }
