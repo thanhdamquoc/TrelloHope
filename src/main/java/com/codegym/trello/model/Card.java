@@ -28,7 +28,6 @@ public class Card implements Comparable<Card>{
     @ManyToMany
     private List<Tag> tags;
 
-
     @Override
     public int compareTo(Card o) {
         if (position == o.position)
