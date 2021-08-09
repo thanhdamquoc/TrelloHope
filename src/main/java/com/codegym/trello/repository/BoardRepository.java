@@ -26,4 +26,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
             "(select m.board_id from member m where m.user_id = ?1) " +
             "order by b.id desc", nativeQuery = true)
     Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId);
+
 }

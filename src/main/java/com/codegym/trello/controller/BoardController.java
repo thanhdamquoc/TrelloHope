@@ -71,4 +71,12 @@ public class BoardController {
     public ResponseEntity<Boolean> isBoardInWorkspace(@PathVariable Long id) {
         return new ResponseEntity<>(workspaceService.isBoardInWorkspace(id), HttpStatus.OK);
     }
+
+    @PostMapping("/delete")
+    public ResponseEntity<MemberWorkspace> deleteAllById(@RequestBody Iterable<Board> boards){
+        for (Board board: boards){
+            boardService.deleteById(board.getId());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
