@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "select m.id, m.user_id as userId, " +
@@ -15,4 +17,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             "join user u on m.user_id = u.id " +
             "where m.board_id = ?1", nativeQuery = true)
     Iterable<DetailedMember> getMembersByBoardId(Long boardId);
+
+    void deleteByBoardIdAndUserId(Long boardId, Long userId);
 }
