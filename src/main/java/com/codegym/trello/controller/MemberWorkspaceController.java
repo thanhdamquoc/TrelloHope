@@ -65,4 +65,8 @@ public class MemberWorkspaceController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping("search/{keyword}/{workspaceId}")
+    public ResponseEntity<Iterable<MemberWorkspace>> showListMemberWorkspace(@PathVariable String keyword, @PathVariable Long workspaceId) {
+        return new ResponseEntity<>(memberWorkspaceService.findByKeyword(keyword, workspaceId), HttpStatus.OK);
+    }
 }
