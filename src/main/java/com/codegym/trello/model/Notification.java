@@ -17,6 +17,7 @@ public class    Notification {
     private Long id;
     private String title;
     private String content;
+    private String url;
     @ManyToMany
     private List<User> receiver;
 }

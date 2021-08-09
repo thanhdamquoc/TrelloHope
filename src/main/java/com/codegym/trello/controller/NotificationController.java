@@ -48,4 +48,8 @@ public class NotificationController {
         notificationService.deleteById(id);
         return new ResponseEntity<>(notificationOptional.get(), HttpStatus.OK);
     }
+    @PostMapping("/save")
+    public ResponseEntity<Iterable<Notification>> saveNotifications(@RequestBody Iterable<Notification> notifications) {
+        return new ResponseEntity<>(notificationService.saveAll(notifications), HttpStatus.CREATED);
+    }
 }
