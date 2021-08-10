@@ -60,13 +60,14 @@ public class CommentController {
         comment.setId(commentOptional.get().getId());
         return new ResponseEntity<>(commentService.save(comment), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Comment> delete(@PathVariable Long id) {
         Optional<Comment> commentOptional = commentService.findById(id);
         if (!commentOptional.isPresent()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         commentService.deleteById(id);
-        return new ResponseEntity<>(commentOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
