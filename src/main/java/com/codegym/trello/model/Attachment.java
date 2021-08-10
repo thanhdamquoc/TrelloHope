@@ -20,6 +20,5 @@ public class Attachment {
     private String source;
     @ManyToOne
     private Card card;
-//    @NotNull
-//    private String name;
+    private String name;
 }
