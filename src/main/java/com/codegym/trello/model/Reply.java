@@ -17,3 +17,4 @@ public class Reply {
     private String content;
     @ManyToOne
     private Member member;
+}
