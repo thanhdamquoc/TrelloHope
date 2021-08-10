@@ -61,4 +61,9 @@ public class BoardServiceImpl implements BoardService {
     public Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId) {
         return boardRepository.findAllSharedBoardsByUserId(userId);
     }
+
+    @Override
+    public Iterable<SimpleBoard> findAllByKeyword(String keyword) {
+        return boardRepository.findAllByKeyword("%" + keyword + "%");
+    }
 }

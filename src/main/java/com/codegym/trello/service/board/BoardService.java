@@ -10,4 +10,5 @@ public interface BoardService extends GeneralService<Board> {
     Iterable<Board> findAllByOwner(User owner);
     Iterable<SimpleBoard> findAllOwnedBoardsByUserId(Long userId);
     Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId);
+    Iterable<SimpleBoard> findAllByKeyword(String keyword);
 }

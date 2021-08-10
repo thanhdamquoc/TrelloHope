@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/boards")
@@ -78,10 +79,15 @@ public class BoardController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<MemberWorkspace> deleteAllById(@RequestBody Iterable<Board> boards){
-        for (Board board: boards){
+    public ResponseEntity<MemberWorkspace> deleteAllById(@RequestBody Iterable<Board> boards) {
+        for (Board board : boards) {
             boardService.deleteById(board.getId());
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<Iterable<SimpleBoard>> findAllByKeyword(@PathVariable String keyword) {
+        return new ResponseEntity<>(boardService.findAllByKeyword(keyword), HttpStatus.OK);
     }
 }

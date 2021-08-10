@@ -27,4 +27,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
             "order by b.id desc", nativeQuery = true)
     Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId);
 
+    @Query(value = "select b.id, b.title, u.username as owner " +
+            "from board b " +
+            "join user u on b.owner_id = u.id " +
+            "where b.title like ?1", nativeQuery = true)
+    Iterable<SimpleBoard> findAllByKeyword(String keyword);
 }
