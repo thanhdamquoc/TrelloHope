@@ -37,4 +37,9 @@ public class CommentService implements ICommentService{
         return commentRepository.findAllByCardId(cardId);
     }
 
+    @Override
+    public Iterable<Comment> saveAll(Iterable<Comment> comments) {
+        return commentRepository.saveAll(comments);
+    }
+
 }

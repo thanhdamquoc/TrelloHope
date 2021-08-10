@@ -58,7 +58,8 @@ public class CardController {
         if (!cardOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(cardOptional.get(), HttpStatus.NO_CONTENT);
+            cardService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 }

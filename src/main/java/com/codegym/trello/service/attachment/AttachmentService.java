@@ -30,4 +30,9 @@ public class AttachmentService implements IAttachmentService{
     public void deleteById(Long id) {
         attachmentRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Attachment> findAttachmentsByCard_Id(Long cardId) {
+        return attachmentRepository.findAttachmentsByCard_Id(cardId);
+    }
 }
