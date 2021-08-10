@@ -1,6 +1,7 @@
 package com.codegym.trello.service.memberworkspace;
 
 import com.codegym.trello.model.MemberWorkspace;
+import com.codegym.trello.model.Workspace;
 import com.codegym.trello.repository.MemberWorkspaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,10 @@ public class MemberWorkspaceImpl implements MemberWorkspaceService{
     @Override
     public void deleteById(Long id) {
         memberWorkspaceRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<MemberWorkspace> findByKeyword(String keyword, Long workspaceId) {
+        return memberWorkspaceRepository.findByKeyword('%' + keyword + '%', workspaceId);
     }
 }

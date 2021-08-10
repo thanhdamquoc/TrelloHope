@@ -30,4 +30,14 @@ public class NotificationService implements INotificationService{
     public void deleteById(Long id) {
         notificationRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Notification> findByUserId(Long userId) {
+        return notificationRepository.findByUserId(userId);
+    }
+
+    @Override
+    public Iterable<Notification> saveAll(Iterable<Notification> notifications) {
+        return notificationRepository.saveAll(notifications);
+    }
 }

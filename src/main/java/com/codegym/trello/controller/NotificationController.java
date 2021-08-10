@@ -1,5 +1,4 @@
 package com.codegym.trello.controller;
-import com.codegym.trello.model.Attachment;
 import com.codegym.trello.model.Notification;
 import com.codegym.trello.service.notification.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +20,9 @@ public class NotificationController {
         return new ResponseEntity<>(notificationService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Notification> findById(@PathVariable Long id) {
-        Optional<Notification> notificationOptional = notificationService.findById(id);
-        if (!notificationOptional.isPresent()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(notificationOptional.get(), HttpStatus.OK);
+    @GetMapping("/{userId}")
+    public ResponseEntity<Iterable<Notification>> findByUserId(@PathVariable Long userId) {
+        return new ResponseEntity<>(notificationService.findByUserId(userId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -52,5 +47,9 @@ public class NotificationController {
         }
         notificationService.deleteById(id);
         return new ResponseEntity<>(notificationOptional.get(), HttpStatus.OK);
+    }
+    @PostMapping("/save")
+    public ResponseEntity<Iterable<Notification>> saveNotifications(@RequestBody Iterable<Notification> notifications) {
+        return new ResponseEntity<>(notificationService.saveAll(notifications), HttpStatus.CREATED);
     }
 }
