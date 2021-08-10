@@ -1,6 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Member;
+import com.codegym.trello.model.User;
 import com.codegym.trello.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
