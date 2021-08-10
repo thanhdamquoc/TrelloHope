@@ -12,7 +12,7 @@ public interface INotificationRepository extends JpaRepository<Notification, Lon
     @Query(nativeQuery = true, value = "select * " +
             "from notification " +
             "         join notification_receiver nr on notification.id = nr.notification_id " +
-            "where nr.receiver_id = ?1 order by id desc")
+            "where nr.receiver_id = ?1 order by id desc limit 99")
     Iterable<Notification> findByUserId(Long userId);
 
     @Modifying(clearAutomatically = true)
