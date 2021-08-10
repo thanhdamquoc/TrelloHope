@@ -23,7 +23,7 @@ public class Card implements Comparable<Card>{
     private String content;
     private int position;
     @ManyToMany
-    private List<Member> members;
+    private List<User> users;
     @ManyToMany
     private List<Tag> tags;
 

@@ -18,6 +18,7 @@ public class Notification {
     private String title;
     private String content;
     private String url;
+    private boolean status;
     @ManyToMany
     private List<User> receiver;
 }
