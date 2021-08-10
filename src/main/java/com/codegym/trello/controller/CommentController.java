@@ -46,6 +46,11 @@ public class CommentController {
         return new ResponseEntity<>(commentService.save(comment), HttpStatus.CREATED);
     }
 
+    @PutMapping
+    public ResponseEntity<Iterable<Comment>> saveAll(@RequestBody Iterable<Comment> comments) {
+        return new ResponseEntity<>(commentService.saveAll(comments), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Comment> update(@PathVariable Long id, @RequestBody Comment comment) {
         Optional<Comment> commentOptional = commentService.findById(id);
