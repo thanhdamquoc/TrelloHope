@@ -4,6 +4,7 @@ import com.codegym.trello.service.notification.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -51,5 +52,12 @@ public class NotificationController {
     @PostMapping("/save")
     public ResponseEntity<Iterable<Notification>> saveNotifications(@RequestBody Iterable<Notification> notifications) {
         return new ResponseEntity<>(notificationService.saveAll(notifications), HttpStatus.CREATED);
+    }
+
+    @Transactional
+    @PutMapping("/read-all")
+    public ResponseEntity<Iterable<Notification>> markAllAsRead(@RequestBody Long userId) {
+        notificationService.markAllAsRead(userId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

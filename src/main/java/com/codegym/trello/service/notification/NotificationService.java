@@ -40,4 +40,9 @@ public class NotificationService implements INotificationService{
     public Iterable<Notification> saveAll(Iterable<Notification> notifications) {
         return notificationRepository.saveAll(notifications);
     }
+
+    @Override
+    public void markAllAsRead(Long userId) {
+       notificationRepository.markAllAsRead(userId);
+    }
 }
