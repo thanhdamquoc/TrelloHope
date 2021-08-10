@@ -86,8 +86,8 @@ public class BoardController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/search/{keyword}")
-    public ResponseEntity<Iterable<SimpleBoard>> findAllByKeyword(@PathVariable String keyword) {
-        return new ResponseEntity<>(boardService.findAllByKeyword(keyword), HttpStatus.OK);
+    @GetMapping("/search/{keyword}/by/{searcherId}")
+    public ResponseEntity<Iterable<Board>> findAllByKeyword(@PathVariable String keyword, @PathVariable Long searcherId) {
+        return new ResponseEntity<>(boardService.findAllByKeyword(keyword, searcherId), HttpStatus.OK);
     }
 }
