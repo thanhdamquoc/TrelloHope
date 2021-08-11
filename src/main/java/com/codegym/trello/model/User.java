@@ -1,9 +1,8 @@
 package com.codegym.trello.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.persistence.Column;
