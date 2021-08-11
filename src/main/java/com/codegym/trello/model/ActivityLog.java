@@ -21,4 +21,6 @@ public class ActivityLog {
     private boolean status;
     @ManyToOne
     private Board board;
+    @ManyToOne
+    private Card card;
 }
