@@ -63,7 +63,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Iterable<Board> findAllByKeyword(String keyword, Long searcherId) {
-        return boardRepository.findAllByKeyword("%" + keyword + "%", searcherId);
+    public Iterable<Board> findAllAvailableToSearcher(Long searcherId) {
+        return boardRepository.findAllAvailableToSearcher(searcherId);
     }
 }

@@ -28,8 +28,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId);
 
     @Query(value = "select * from board b " +
-            "where ((b.owner_id = ?2) or (b.id in (select m.board_id from member m where m.user_id = ?2))) " +
-            "and ((b.title like ?1) or (b.owner_id in (select u.id from user u where u.username like ?1))) " +
-            "limit 5", nativeQuery = true)
-    Iterable<Board> findAllByKeyword(String keyword, Long searcherId);
+            "where ((b.owner_id = ?1) or (b.id in (select m.board_id from member m where m.user_id = ?1))) ", nativeQuery = true)
+    Iterable<Board> findAllAvailableToSearcher(Long searcherId);
 }
