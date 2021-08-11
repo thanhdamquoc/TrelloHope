@@ -35,6 +35,11 @@ public class ReplyController {
         return new ResponseEntity<>(replyOptional, HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<Iterable<Reply>> saveAll(@RequestBody Iterable<Reply> replies) {
+        return new ResponseEntity<>(replyService.saveAll(replies), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Reply> updateReplyById(@PathVariable Long id, @RequestBody Reply reply){
         Optional<Reply> replyOptional = replyService.findById(id);

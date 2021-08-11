@@ -32,4 +32,8 @@ public class ReplyService implements IReplyService{
         replyRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Reply> saveAll(Iterable<Reply> replies) {
+        return replyRepository.saveAll(replies);
+    }
 }

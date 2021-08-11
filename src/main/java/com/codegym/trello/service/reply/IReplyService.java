@@ -5,4 +5,6 @@ import com.codegym.trello.service.GeneralService;
 
 public interface IReplyService extends GeneralService<Reply> {
 
+    Iterable<Reply> saveAll(Iterable<Reply> replies);
+
 }
