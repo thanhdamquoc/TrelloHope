@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
     @Query(nativeQuery = true, value = "select * from workspace w " +
-            "where w.owner_id = 1 " +
+            "where w.owner_id = ?1 " +
             "   or w.id in " +
             "      (select wm.workspace_id " +
             "      from workspace_members wm " +
-            "          where wm.members_id = 1)")
+            "          where wm.members_id = ?1)")
     Iterable<Workspace> findAllByOwnerId(Long id);
 
     @Query(nativeQuery = true,
