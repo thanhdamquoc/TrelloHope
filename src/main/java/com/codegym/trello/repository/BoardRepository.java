@@ -22,8 +22,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query(value = "select b.id, b.title, u.username as owner " +
             "from board b " +
             "join user u on b.owner_id = u.id " +
-            "where b.id in " +
-            "(select m.board_id from member m where m.user_id = ?1) " +
+            "where (b.id in " +
+            "(select m.board_id from member m where m.user_id = ?1)) " +
+            "and (b.owner_id <> ?1) " +
             "order by b.id desc", nativeQuery = true)
     Iterable<SimpleBoard> findAllSharedBoardsByUserId(Long userId);
 
