@@ -53,6 +53,12 @@ public class UserController {
         return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}/recover")
+    public ResponseEntity<User> updateRecoveredUser(@PathVariable Long id, @RequestBody User user) {
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteById(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
