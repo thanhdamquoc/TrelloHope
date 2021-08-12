@@ -14,4 +14,5 @@ public interface UserService extends GeneralService<User>, UserDetailsService {
 
     Iterable<User> findMembersByBoardId(Long boardId);
 
+    User update(User user);
 }

@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
     public Iterable<User> findMembersByBoardId(Long boardId) {
         return userRepository.findMembersByBoardId(boardId);
     }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
 }
