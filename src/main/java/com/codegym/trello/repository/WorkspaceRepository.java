@@ -14,8 +14,7 @@ public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
             "      (select wm.workspace_id " +
             "       from workspace_members wm " +
             "                join member_workspace mw on wm.members_id = mw.id " +
-            "       where mw.user_id = ?1 " +
-            "      )")
+            "       where mw.user_id = ?1)")
     Iterable<Workspace> findAllByOwnerId(Long id);
 
     @Query(nativeQuery = true,
