@@ -1,8 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Member;
-import com.codegym.trello.model.User;
-import com.codegym.trello.service.member.MemberService;
+import com.codegym.trello.service.member.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class MemberController {
 
     @Autowired
-    private MemberService memberService;
+    private IMemberService memberService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Member>> showListMember() {

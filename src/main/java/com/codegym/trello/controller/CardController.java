@@ -1,7 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Card;
-import com.codegym.trello.service.card.CardService;
+import com.codegym.trello.service.card.ICardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/cards")
 public class CardController {
     @Autowired
-    private CardService cardService;
+    private ICardService cardService;
 
     @GetMapping
     public ResponseEntity<Iterable<Card>> findAll() {

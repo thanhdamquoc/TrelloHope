@@ -1,7 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Reply;
-import com.codegym.trello.service.reply.ReplyService;
+import com.codegym.trello.service.reply.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/replies")
 public class ReplyController {
     @Autowired
-    private ReplyService replyService;
+    private IReplyService replyService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Reply>> showListReply() {

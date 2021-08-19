@@ -1,7 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Column;
-import com.codegym.trello.service.column.ColumnService;
+import com.codegym.trello.service.column.IColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/columns")
 public class ColumnController {
     @Autowired
-    private ColumnService columnService;
+    private IColumnService columnService;
 
     @GetMapping
     public ResponseEntity<Iterable<Column>> findAll() {

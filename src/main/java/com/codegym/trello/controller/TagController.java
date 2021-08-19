@@ -1,7 +1,7 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Tag;
-import com.codegym.trello.service.tag.TagService;
+import com.codegym.trello.service.tag.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class TagController {
 
     @Autowired
-    private TagService tagService;
+    private ITagService tagService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Tag>> showListTag() {
