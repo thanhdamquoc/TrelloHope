@@ -1,7 +1,6 @@
 package com.codegym.trello.controller;
 
 import com.codegym.trello.model.Card;
-import com.codegym.trello.model.Column;
 import com.codegym.trello.service.card.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
-@CrossOrigin
 @RequestMapping("/cards")
 public class CardController {
     @Autowired

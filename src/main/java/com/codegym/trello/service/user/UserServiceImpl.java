@@ -16,6 +16,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Iterable<User> findAll() {
         return userRepository.findAll();
@@ -28,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -48,8 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsernameAndNickname(String username, String nickname) {
-        return userRepository.findByUsernameAndNickname(username, nickname);
+    public User findByUsernameAndEmail(String username, String email) {
+        return userRepository.findByUsernameAndEmail(username, email);
     }
 
     @Override
