@@ -13,10 +13,20 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tag {
+public class Tag implements Comparable<Tag> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String color;
+
+    @Override
+    public int compareTo(Tag o) {
+        if (id == o.id)
+            return 0;
+        else if (id > o.id)
+            return 1;
+        else
+            return -1;
+    }
 }

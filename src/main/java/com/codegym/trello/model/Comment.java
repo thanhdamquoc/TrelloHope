@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +20,6 @@ public class Comment {
     private String content;
     @ManyToOne
     private Card card;
+    @OneToMany
+    private List<Reply> replies;
 }
