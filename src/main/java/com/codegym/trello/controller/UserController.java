@@ -37,13 +37,14 @@ public class UserController {
     }
 
     @PostMapping("/recoverpassword")
-    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user){
+    public ResponseEntity<User> findByUserNameAndNickName(@RequestBody User user) {
         User userOptional = userService.findByUsernameAndEmail(user.getUsername(), user.getEmail());
         return new ResponseEntity<>(userOptional, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<User> add(@RequestBody User user) {
+        user.setImage("https://i.pinimg.com/originals/57/fb/31/57fb3190d0cc1726d782c4e25e8561e9.png");
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
@@ -82,6 +83,7 @@ public class UserController {
     public ResponseEntity<Iterable<User>> findUserByKeyword(@PathVariable String keyword) {
         return new ResponseEntity<>(userService.findUserByKeyword(keyword), HttpStatus.OK);
     }
+
     @GetMapping("board/{boardId}")
     public ResponseEntity<Iterable<User>> findByBoardId(@PathVariable Long boardId) {
         return new ResponseEntity<>(userService.findMembersByBoardId(boardId), HttpStatus.OK);

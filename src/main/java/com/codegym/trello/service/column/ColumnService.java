@@ -32,4 +32,10 @@ public class ColumnService implements IColumnService {
         columnRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Column> saveAll(Iterable<Column> columns) {
+        return columnRepository.saveAll(columns);
+    }
+
+
 }
